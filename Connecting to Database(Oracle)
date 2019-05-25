@@ -1,0 +1,15 @@
+import cx_Oracle
+try:
+con=cx_Oracle.connect('<User name>/<Password>@<DB Host Name/IP>')
+cursor=con.cursor()
+cursor.execute("create table emp(empno number,empname varchar2(10),empsal number(10,2))")
+print("Employee Table created in DataBase")
+except cx_Oracle.DatabaseError as err:
+if con:
+con.rollback()
+print("Check Query Syntax",err)
+finally:
+if cursor:
+cursor.close()
+if con:
+con.close()
